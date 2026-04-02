@@ -34,17 +34,21 @@ public class Part1{
     }
     
     // This method will parse the remaining part of the expression after the first term and return the result as a string
-    private String parseExpressionPrime(String line, int[] pos, String term){
-        while (pos[0] < line.length() && line.charAt(pos[0]) == '/')  {
-            pos[0]++; // Move past the '/' character
+    private String parseExpressionPrime(String line, int[] pos, String term) {
+        if (pos[0] < line.length() && line.charAt(pos[0]) == '/') {
+            pos[0]++; // consume '/'
             String nextTerm = parseTerm(line, pos);
             if (nextTerm == null) {
-                return null; // If the next term is invalid, return null
+                return null;
             }
-
-            // Check if the next term ends with the current term and if it does, remove the current term from the end of the next term
-            if (term.endsWith(nextTerm)){
-                term = term.substring(0, term.length() - nextTerm.length());
+            // Recursively parse the rest (right-associative)
+            String rest = parseExpressionPrime(line, pos, nextTerm);
+            
+            // Apply the operation: a / b
+            if (term.endsWith(rest)) {
+                return term.substring(0, term.length() - rest.length());
+            } else {
+                return term;
             }
         }
         return term;
