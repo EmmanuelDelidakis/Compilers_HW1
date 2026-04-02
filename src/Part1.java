@@ -21,25 +21,46 @@ public class Part1{
         if (term == null) {
             return null;
         }
-        return "";
+        return parseExpressionPrime(line, pos, term);
     }
     
-    private String ParseExpressionPrime(string line, int[] pos){
-        return "";
+    // This method will parse the remaining part of the expression after the first term and return the result as a string
+    private String parseExpressionPrime(String line, int[] pos, String term){
+        while (pos[0] < line.length() && line.charAt(pos[0]) == '/')  {
+            pos[0]++; // Move past the '/' character
+            String nextTerm = parseTerm(line, pos);
+            if (nextTerm == null) {
+                return null; // If the next term is invalid, return null
+            }
+
+            // Check if the next term ends with the current term and if it does, remove the current term from the end of the next term
+            if (nextTerm.endsWith(nextTerm)){
+                term = term.substring(0, term.length() - nextTerm.length());
+            }
+        }
+        return term;
     }
 
-    private String ParseTermPrime(string line, int[] pos){
-        return "";
+    // This method will parse the remaining part of the term after the first factor and return the result as a string
+    private String parseTermPrime(String line, int[] pos, String term){
+        while (pos[0] + 1 < line.length() && line.charAt(pos[0]) == '*' && line.charAt(pos[0] + 1) == '*') {
+            pos[0] += 2; // Move past the '**' characters
+            String nextFactor = parseFactor(line, pos);
+            if (nextFactor == null) {
+                return null; // If the next factor is invalid, return null
+            }
+            term = term + nextFactor; // Concatenate the current term with the next factor
+        }
+        return term;
     }
 
     // This method will parse a term in the expression and return the result as a string
     private String parseTerm(String line, int[] pos) {
-        String factor = parseFactor(line, pos);
-        if (factor == null) {
+        String term = parseFactor(line, pos);
+        if (term == null){
             return null;
         }
-
-        return "";
+        return parseTermPrime(line, pos, term);
     }
 
     // This method will parse a factor in the expression and return the result as a string
@@ -84,7 +105,7 @@ public class Part1{
 
  
     // Method to read input, parse the expression, and evaluate it 
-    public void ParseAndEvaluate(){
+    public void parseAndEvaluate(){
         try {
             // Read a line of input from the user
             String line = reader.readLine();
@@ -128,6 +149,6 @@ public class Part1{
     public static void main(String[] args) throws IOException {
         // Create an instance of Part1 and pass System.in as the input stream
         Part1 evaluator = new Part1(System.in);
-        evaluator.ParseAndEvaluate();
+        evaluator.parseAndEvaluate();
     }
 }
