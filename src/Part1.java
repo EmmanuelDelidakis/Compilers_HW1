@@ -15,13 +15,22 @@ public class Part1{
         return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
     }
 
-    // This method will parse the expression and return the result as a string
+    // Parses an expression according to the grammar and returns the evaluated result as a string
     private String parseExpression(String line, int[] pos) {
         String term = parseTerm(line, pos);
         if (term == null) {
             return null;
         }
         return parseExpressionPrime(line, pos, term);
+    }
+
+    // This method will parse a term in the expression and return the result as a string
+    private String parseTerm(String line, int[] pos) {
+        String term = parseFactor(line, pos);
+        if (term == null){
+            return null;
+        }
+        return parseTermPrime(line, pos, term);
     }
     
     // This method will parse the remaining part of the expression after the first term and return the result as a string
@@ -45,22 +54,13 @@ public class Part1{
     private String parseTermPrime(String line, int[] pos, String term){
         while (pos[0] + 1 < line.length() && line.charAt(pos[0]) == '*' && line.charAt(pos[0] + 1) == '*') {
             pos[0] += 2; // Move past the '**' characters
-            String nextFactor = parseFactor(line, pos);
-            if (nextFactor == null) {
+            String nextTerm = parseFactor(line, pos);
+            if (nextTerm == null) {
                 return null; // If the next factor is invalid, return null
             }
-            term = term + nextFactor; // Concatenate the current term with the next factor
+            term = term + nextTerm + nextTerm; // Concatenate the current term with the next factor
         }
         return term;
-    }
-
-    // This method will parse a term in the expression and return the result as a string
-    private String parseTerm(String line, int[] pos) {
-        String term = parseFactor(line, pos);
-        if (term == null){
-            return null;
-        }
-        return parseTermPrime(line, pos, term);
     }
 
     // This method will parse a factor in the expression and return the result as a string
