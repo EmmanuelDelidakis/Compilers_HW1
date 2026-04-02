@@ -24,7 +24,7 @@ public class Part1{
     }
 
  
-    // Method to read input, parse the expression, and evaluate it
+    // Method to read input, parse the expression, and evaluate it 
     public void ParseAndEvaluate(){
         try {
             // Read a line of input from the user
@@ -32,6 +32,13 @@ public class Part1{
 
             // Check if the line is null (end of input) and return if it is
             if (line == null){
+                return;
+            }
+
+            line = line.trim(); 
+            
+            // Check if the line is empty after trimming and return if it is
+            if (line.isEmpty()) {
                 return;
             }
         
@@ -52,11 +59,13 @@ public class Part1{
                 System.err.println("parse error");
             }
         }
+        // Catch any IOException that may occur during input reading and print a parse error message
         catch (IOException e) {
             System.err.println("parse error");
         }
     }
 
+    // Main method to run the program
     public static void main(String[] args) throws IOException {
         // Create an instance of Part1 and pass System.in as the input stream
         Part1 evaluator = new Part1(System.in);
