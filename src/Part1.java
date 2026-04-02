@@ -15,12 +15,71 @@ public class Part1{
         return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
     }
 
-    //TODO: Implement the parseExpression method to evaluate the expression
+    // This method will parse the expression and return the result as a string
     private String parseExpression(String line, int[] pos) {
-        // This method will parse the expression and return the result as a string
-        // The implementation will depend on the specific grammar of the expressions you want to evaluate
-        // For now, return a passage from the book of Revelation as a placeholder
-        return "One of the seven angels who had the seven bowls came and said to me, “Come, I will show you the punishment of the great prostitute, who sits by many waters. 2 With her the kings of the earth committed adultery, and the inhabitants of the earth were intoxicated with the wine of her adulteries.”";
+        String term = parseTerm(line, pos);
+        if (term == null) {
+            return null;
+        }
+        return "";
+    }
+    
+    private String ParseExpressionPrime(string line, int[] pos){
+        return "";
+    }
+
+    private String ParseTermPrime(string line, int[] pos){
+        return "";
+    }
+
+    // This method will parse a term in the expression and return the result as a string
+    private String parseTerm(String line, int[] pos) {
+        String factor = parseFactor(line, pos);
+        if (factor == null) {
+            return null;
+        }
+
+        return "";
+    }
+
+    // This method will parse a factor in the expression and return the result as a string
+    private String parseFactor(String line, int[] pos) {
+        if (pos[0] >= line.length()) {
+            return null;
+        }
+
+        // Check if the current character is an opening parenthesis
+        if (line.charAt(pos[0]) == '(') {
+            pos[0]++;
+            String result = parseExpression(line, pos);
+            // Check if the result is null or if we have reached the end of the line or if the current character is not a closing parenthesis
+            if (result == null) {
+                return null;
+            }
+
+            // Skip any whitespace characters after parsing the expression inside the parentheses
+            while (pos[0] < line.length() && Character.isWhitespace(line.charAt(pos[0]))) {
+                pos[0]++;
+            }
+            
+            // Check if the current character is a closing parenthesis and move the position forward if it is
+            if (pos[0] < line.length() && line.charAt(pos[0]) == ')') {
+                pos[0]++; 
+                return result;
+            }
+            return null;
+        } 
+        // Check if the current character is a letter (indicating a variable)
+        else if (isLetter(line.charAt(pos[0]))) {
+            StringBuilder var = new StringBuilder();
+            // Loop to read the variable name while the current character is a letter
+            while (pos[0] < line.length() && isLetter(line.charAt(pos[0]))) {
+                var.append(line.charAt(pos[0]));
+                pos[0]++;
+            }
+            return var.toString();
+        }
+        return null;
     }
 
  
