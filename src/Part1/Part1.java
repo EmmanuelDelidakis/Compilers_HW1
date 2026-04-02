@@ -1,3 +1,4 @@
+package Part1;
 import java.io.*; // Import necessary classes for input/output operations
 
 public class Part1{
