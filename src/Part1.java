@@ -43,7 +43,7 @@ public class Part1{
             }
 
             // Check if the next term ends with the current term and if it does, remove the current term from the end of the next term
-            if (nextTerm.endsWith(nextTerm)){
+            if (term.endsWith(nextTerm)){
                 term = term.substring(0, term.length() - nextTerm.length());
             }
         }
