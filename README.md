@@ -1,3 +1,4 @@
+Part1:
 Το πρόγραμμα Part1 υλοποιεί έναν αναλυτή (parser) και εκτιμητή (evaluator) για μια μικρή γλώσσα 
 εκφράσεων που λειτουργεί με χειρισμό συμβολοσειρών και όχι με αριθμητικές τιμές.
 
@@ -31,3 +32,42 @@ ExpressionPrime → '/' Term ExpressionPrime | ε
 Term        → Factor TermPrime
 TermPrime   → '**' Factor TermPrime | ε
 Factor      → '(' Expression ')' | Letter+
+
+Part2:
+Στο δεύτερο μέρος της εργασίας υλοποιήθηκε ένας parser και translator για μια γλώσσα που υποστηρίζει λειτουργίες πάνω σε strings.
+
+Ο μεταφραστής:
+-Διαβάζει πρόγραμμα από stdin
+-Αναλύει τη σύνταξη με JavaCUP
+-Χρησιμοποιεί JFlex για lexical analysis
+-Παράγει ισοδύναμο πρόγραμμα σε Java (stdout)
+
+Η γλώσσα εισόδου υποστηρίζει:
+Μόνο String
+
+-Εκφράσεις
+Concatenation:
+expr + expr
+
+-Συναρτήσεις:
+Ορισμός:
+f(a, b) {
+    expr
+}
+
+Κλήση:
+f("hello", "world")
+
+-Συνθήκες:
+if-else:
+if (condition) {
+    expr1
+} else {
+    expr2
+}
+
+-Λογικές Συναρτήσεις:
+Prefix:
+is-prefix-of(a, b)
+Suffix:
+is-suffix-of(a, b)

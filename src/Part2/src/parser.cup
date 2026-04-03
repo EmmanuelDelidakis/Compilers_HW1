@@ -1,0 +1,44 @@
+import java_cup.runtime.*;
+import java.util.*;
+
+parser code {:
+    public void report_error(String message, Object info) {
+        StringBuilder sb = new StringBuilder("Parser error");
+        if (info instanceof Symbol) {
+            Symbol s = (Symbol) info;
+            if (s.left >= 0) sb.append(" at line ").append(s.left + 1);
+            if (s.right >= 0) sb.append(", column ").append(s.right + 1);
+        }
+        sb.append(": ").append(message);
+        System.err.println(sb.toString());
+    }
+    public void report_fatal_error(String message, Object info) {
+        report_error(message, info);
+        System.exit(1);
+    }
+:};
+
+/* Terminals */
+terminal            DEF, IF, ELSE, PREFIX, SUFFIX;
+terminal            PLUS, LPAREN, RPAREN, COMMA, COLON, SEMICOLON;
+terminal String     ID, STRING_LIT;
+
+/* Non-terminals */
+non terminal String         program;
+non terminal List<String>   func_decl_list;
+non terminal String         func_decl;
+non terminal List<String>   param_list;
+non terminal List<String>   param_list_nonempty;
+non terminal List<String>   stmt_list;
+non terminal String         stmt;
+non terminal String         expr;
+non terminal String         concat_expr;
+non terminal String         primary;
+non terminal List<String>   arg_list;
+non terminal List<String>   arg_list_nonempty;
+
+/* Precedence: if has lower precedence than concat (+) */
+precedence right    IF, ELSE;
+precedence left     PLUS;
+
+start with program;

@@ -1,7 +1,0 @@
-def check(a, b) :
-    if (a prefix b) "prefix-match" else if (a suffix b) "suffix-match" else "no-match";
-def
-
-check("he", "hello");
-check("lo", "hello");
-check("xy", "hello");
