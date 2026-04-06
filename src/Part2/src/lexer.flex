@@ -1,10 +1,11 @@
-package Part2.lib;
+package Part2.src;
 
 import java_cup.runtime.Symbol;
 
 %%
 
 %class Lexer
+%public
 %unicode
 %cup
 %line
@@ -27,22 +28,24 @@ STRING = \"([^\"\\]|\\.)*\"
 
 %%
 
-"if"            { return symbol(sym.IF); }
-"else"          { return symbol(sym.ELSE); }
+"if"            { return symbol(Part2.src.sym.IF); }
+"else"          { return symbol(Part2.src.sym.ELSE); }
+"def"           { return symbol(Part2.src.sym.DEF); }
 
-"is-prefix-of"  { return symbol(sym.PREFIX); }
-"is-suffix-of"  { return symbol(sym.SUFFIX); }
+"is-prefix-of"  { return symbol(Part2.src.sym.PREFIX); }
+"is-suffix-of"  { return symbol(Part2.src.sym.SUFFIX); }
 
-"+"             { return symbol(sym.PLUS); }
-","             { return symbol(sym.COMMA); }
-"("             { return symbol(sym.LPAREN); }
-")"             { return symbol(sym.RPAREN); }
-"{"             { return symbol(sym.LBRACE); }
-"}"             { return symbol(sym.RBRACE); }
+";"             { return symbol(Part2.src.sym.SEMICOLON); }
+"+"             { return symbol(Part2.src.sym.PLUS); }
+","             { return symbol(Part2.src.sym.COMMA); }
+"("             { return symbol(Part2.src.sym.LPAREN); }
+")"             { return symbol(Part2.src.sym.RPAREN); }
+"{"             { return symbol(Part2.src.sym.LBRACE); }
+"}"             { return symbol(Part2.src.sym.RBRACE); }
 
-{STRING}        { return symbol(sym.STRING, yytext()); }
-{IDENTIFIER}    { return symbol(sym.ID, yytext()); }
+{STRING}        { return symbol(Part2.src.sym.STRING, yytext()); }
+{IDENTIFIER}    { return symbol(Part2.src.sym.ID, yytext()); }
 
-[ \t\r\n]+      { /* ignore */ }
+[ \t\r\n]+      { /* ignore whitespace */ }
 
 .               { throw new Error("Unexpected char: " + yytext()); }

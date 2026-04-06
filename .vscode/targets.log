@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Apr  3 16:30:58 2026
+# Make data base, printed on Mon Apr  6 20:38:04 2026
 
 # Variables
 
@@ -22,8 +22,6 @@ LC_ALL = C
 VBOX_HWVIRTEX_IGNORE_SVM_IN_USE = 1
 # environment
 USERPROFILE = C:\Users\manos
-# environment
-EFC_18536_2283032206 = 1
 # environment
 LOCALAPPDATA = C:\Users\manos\AppData\Local
 # environment
@@ -45,7 +43,7 @@ OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT = true
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_2296_ATLZPGSGDOKWUJBN
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_22288_UQYILLIPKBSKLYYV
 # environment
 COPILOT_OTEL_EXPORTER_TYPE = file
 # environment
@@ -101,19 +99,17 @@ MAKEFILE_LIST :=
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 2296
+EFC_2252_2775293581 = 1
+# environment
+VSCODE_PID = 22288
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
-# environment
-EFC_18536_2775293581 = 1
 # automatic
 *F = $(notdir $*)
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # environment
 VSCODE_NLS_CONFIG = {"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"C:\\Users\\manos\\AppData\\Local\\Programs\\Microsoft VS Code\\e7fb5e96c0\\resources\\app\\out\\nls.messages.json","locale":"en-us","availableLanguages":{}}
-# environment
-EFC_18536_1262719628 = 1
 # default
 MAKE_HOST := x86_64-pc-msys
 # environment
@@ -139,6 +135,8 @@ MAKE = $(MAKE_COMMAND)
 # environment
 PATH = /c/Users/manos/AppData/Local/Programs/Microsoft VS Code:/c/Program Files/Common Files/Oracle/Java/javapath:/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mingw64/bin:/usr/bin:/c/WINDOWS/system32:/c/WINDOWS:/c/WINDOWS/System32/Wbem:/c/WINDOWS/System32/WindowsPowerShell/v1.0:/c/WINDOWS/System32/OpenSSH:/c/Program Files/PuTTY:/c/Program Files/MATLAB/R2024b/runtime/win64:/c/Program Files/MATLAB/R2024b/bin:/c/Program Files/dotnet:/c/Program Files/OpenVPN/bin:/c/Program Files/Git/cmd:/c/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit:/c/Program Files/CMake/bin:/c/Users/manos/AppData/Local/Programs/Python/Python313/Scripts:/c/Users/manos/AppData/Local/Programs/Python/Python313:/c/Users/manos/AppData/Local/Microsoft/WindowsApps:/c/Users/manos/AppData/Local/Programs/Microsoft VS Code/bin:/c/Users/manos/AppData/Local/GitHubDesktop/bin:/c/Program Files/JetBrains/PyCharm 2025.1/bin:/c/Tools/FLCTools/jflex-1.9.1/bin
 # environment
+EFC_2252_1592913036 = 1
+# environment
 COMPUTERNAME = LAPTOP-8NQDJCEP
 # default
 MAKEFILES := 
@@ -151,6 +149,8 @@ PYCHARM = C:\Program Files\JetBrains\PyCharm 2025.1\bin;
 # environment
 PROMPT = $P$G
 # environment
+EFC_2252_2283032206 = 1
+# environment
 APPLICATION_INSIGHTS_NO_STATSBEAT = true
 # environment
 LOGONSERVER = \\LAPTOP-8NQDJCEP
@@ -160,6 +160,8 @@ PULP = c:\users\manos\appdata\local\programs\python\python313\lib\site-packages
 USERNAME = manos
 # environment
 COMMONPROGRAMFILES = C:\Program Files\Common Files
+# environment
+EFC_2252_1262719628 = 1
 # automatic
 ?F = $(notdir $?)
 # environment
@@ -174,8 +176,6 @@ USERDOMAIN = LAPTOP-8NQDJCEP
 GNUMAKEFLAGS := 
 # environment
 OS = Windows_NT
-# environment
-EFC_18536_3789132940 = 1
 # makefile
 .DEFAULT_GOAL := 
 # default
@@ -191,8 +191,6 @@ NODE_TLS_REJECT_UNAUTHORIZED = undefined
 # environment
 PUBLIC = C:\Users\Public
 # environment
-EFC_18536_1592913036 = 1
-# environment
 APPDATA = C:\Users\manos\AppData\Roaming
 # environment
 HOMEDRIVE = C:
@@ -202,6 +200,8 @@ COPILOT_OTEL_ENABLED = true
 PROCESSOR_ARCHITECTURE = AMD64
 # environment
 VSCODE_DOTNET_INSTALL_TOOL_ORIGINAL_HOME = undefined
+# environment
+EFC_2252_3789132940 = 1
 # environment
 HOME = /home/manos
 # environment
@@ -241,9 +241,9 @@ PROCESSOR_IDENTIFIER = AMD64 Family 23 Model 160 Stepping 0, AuthenticAMD
 
 # Directories
 
-# . (device 1116076344, inode 2251799815079418): 7 files, no impossibilities.
+# . (device 1116076344, inode 2251799815079418): 11 files, no impossibilities.
 
-# 7 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -293,12 +293,12 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 14 / storage = 102 B / avg = 7 B
-# current buf: size = 8162 B / used = 102 B / count = 14 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 18 / storage = 152 B / avg = 8 B
+# current buf: size = 8162 B / used = 152 B / count = 18 / avg = 8 B
 
-# strcache performance: lookups = 16 / hit rate = 12%
+# strcache performance: lookups = 20 / hit rate = 10%
 # hash-table stats:
-# Load=14/8192=0%, Rehash=0, Collisions=0/16=0%
-# Finished Make data base on Fri Apr  3 16:30:58 2026
+# Load=18/8192=0%, Rehash=0, Collisions=0/20=0%
+# Finished Make data base on Mon Apr  6 20:38:04 2026
 
  

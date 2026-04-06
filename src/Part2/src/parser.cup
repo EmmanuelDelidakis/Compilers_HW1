@@ -1,9 +1,9 @@
+package Part2.src;
+
 import java_cup.runtime.*;
 import java.util.*;
 
-parser code {:
-  // No extra state needed
-:};
+parser code {: :};
 
 terminal String ID, STRING;
 terminal IF, ELSE, DEF;
@@ -15,133 +15,106 @@ terminal SEMICOLON;
 non terminal String program;
 non terminal String func_list, func;
 non terminal String stmt_list, stmt;
-non terminal String expr, cond, arg_list, param_list;
+non terminal String expr;
+non terminal String arg_list, param_list;
 
-precedence left PLUS;
 precedence nonassoc ELSE;
-precedence nonassoc IF;
+precedence left PLUS;
 
 start with program;
 
-//////////////////////////////////////////////////
-// PROGRAM
-//////////////////////////////////////////////////
-
-program ::= func_list stmt_list
+program ::= func_list:f stmt_list:s
 {:
-    RESULT = "public class Main {\n" +
-             $1 +
-             "public static void main(String[] args) {\n" +
-             $2 +
-             "}\n}";
+    RESULT = "public class Main {" + "\n" + f + "    public static void main(String[] args) {" + "\n" + s + "    }" + "\n" + "}" + "\n";
 :};
 
-//////////////////////////////////////////////////
-// FUNCTIONS
-//
-// func_list is nullable. The conflict is gone because
-// func always starts with DEF (a unique keyword), so
-// the parser can always distinguish "start a function"
-// from "reduce func_list to empty and start statements"
-// with a single token of lookahead.
-//////////////////////////////////////////////////
-
-func_list ::= func_list func
+func_list ::= func_list:f func:fn
 {:
-    RESULT = $1 + $2;
+    RESULT = f + fn;
 :}
            | /* empty */
 {:
     RESULT = "";
 :};
 
-func ::= DEF ID LPAREN param_list RPAREN LBRACE stmt_list RBRACE
+func ::= DEF ID:name LPAREN param_list:p RPAREN LBRACE expr:e RBRACE
 {:
-    RESULT = "public static String " + $2 + "(" + $4 + ") {\n" +
-             $7 +
-             "return \"\";\n}\n";
+    RESULT = "    public static String " + name + "(" + p + ") {" + "\n" + "        return " + e + ";" + "\n" + "    }" + "\n" + "\n";
 :};
 
-param_list ::= param_list COMMA ID
+param_list ::= param_list:p COMMA ID:i
 {:
-    RESULT = $1 + ", String " + $3;
+    RESULT = p + ", String " + i;
 :}
-             | ID
+             | ID:i
 {:
-    RESULT = "String " + $1;
+    RESULT = "String " + i;
 :}
              | /* empty */
 {:
     RESULT = "";
 :};
 
-//////////////////////////////////////////////////
-// STATEMENTS
-//////////////////////////////////////////////////
-
-stmt_list ::= stmt_list stmt
+stmt_list ::= stmt_list:s stmt:st
 {:
-    RESULT = $1 + $2;
+    RESULT = s + st;
+:}
+            | stmt:st
+{:
+    RESULT = st;
 :}
             | /* empty */
 {:
     RESULT = "";
 :};
 
-stmt ::= expr SEMICOLON
+stmt ::= expr:e SEMICOLON
 {:
-    RESULT = $1 + ";\n";
+    RESULT = "System.out.println(" + e + ");" + "\n";
 :}
-       | IF LPAREN cond RPAREN LBRACE stmt_list RBRACE ELSE LBRACE stmt_list RBRACE
+       | IF LPAREN expr:cond RPAREN LBRACE stmt_list:if_body RBRACE ELSE LBRACE stmt_list:else_body RBRACE
 {:
-    RESULT = "if (" + $3 + ") {\n" +
-             $6 + "} else {\n" +
-             $10 + "}\n";
+    RESULT = "if (" + cond + ".equals(\"true\")) {" + "\n" + if_body + "} else {" + "\n" + else_body + "}" + "\n";
 :};
 
-//////////////////////////////////////////////////
-// EXPRESSIONS
-//////////////////////////////////////////////////
-
-expr ::= expr PLUS expr
+expr ::= expr:e1 PLUS expr:e2
 {:
-    RESULT = $1 + " + " + $3;
+    RESULT = e1 + " + " + e2;
 :}
-       | STRING
+       | PREFIX LPAREN expr:e1 COMMA expr:e2 RPAREN
 {:
-    RESULT = $1;
+    RESULT = "(" + e1 + ".startsWith(" + e2 + ") ? \"true\" : \"false\")";
 :}
-       | ID LPAREN arg_list RPAREN
+       | SUFFIX LPAREN expr:e1 COMMA expr:e2 RPAREN
 {:
-    RESULT = $1 + "(" + $3 + ")";
+    RESULT = "(" + e1 + ".endsWith(" + e2 + ") ? \"true\" : \"false\")";
 :}
-       | ID
+       | ID:name LPAREN arg_list:args RPAREN
 {:
-    RESULT = $1;
+    RESULT = name + "(" + args + ")";
+:}
+       | LPAREN expr:e RPAREN
+{:
+    RESULT = "(" + e + ")";
+:}
+       | STRING:s
+{:
+    RESULT = s;
+:}
+       | ID:i
+{:
+    RESULT = i;
 :};
 
-arg_list ::= arg_list COMMA expr
+arg_list ::= arg_list:a COMMA expr:e
 {:
-    RESULT = $1 + ", " + $3;
+    RESULT = a + ", " + e;
 :}
-           | expr
+           | expr:e
 {:
-    RESULT = $1;
+    RESULT = e;
 :}
            | /* empty */
 {:
     RESULT = "";
-:};
-
-//////////////////////////////////////////////////
-// CONDITIONS
-//////////////////////////////////////////////////
-
-cond ::= expr PREFIX expr
-{:
-    RESULT = $3 + ".startsWith(" + $1 + ")";
-:}
-       | expr SUFFIX expr
-{:
-    RESULT = $3 + ".endsWith(" + $1 + ")";
 :};
